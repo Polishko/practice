@@ -1,0 +1,49 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ol {
+  counter-reset: list-counter;
+}
+
+ul,
+ol {
+  list-style-position: outside;
+  padding-left: 0;
+  list-style: none;
+}
+
+li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.5em;
+  margin-left: 0.5rem;
+}
+
+ul li::before {
+  content: "\25AA";
+  position: absolute;
+  left: 0;
+}
+
+ol li {
+  counter-increment: list-counter;
+}
+
+ol li::before {
+  content: counter(list-counter) ".";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
