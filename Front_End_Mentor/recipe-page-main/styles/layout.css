@@ -37,8 +37,13 @@ table tr > td:nth-child(2) {
 }
 
 .container h2 + ul li::before,
-.container h2 + ol li::before,
-.container h2,
+h2 {
+  color: hsl(332, 51%, 32%);
+}
+
+.container h3 + ul li::before,
+.container h3 + ol li::before,
+.container h3,
 table tr > td:nth-child(2) {
   color: hsl(14, 45%, 36%);
 }
@@ -46,11 +51,6 @@ table tr > td:nth-child(2) {
 .container h2,
 .container h3 {
   margin-bottom: 0.75em;
-}
-
-.container h3 + ul li::before,
-h3 {
-  color: hsl(332, 51%, 32%);
 }
 
 .image-container,
@@ -61,6 +61,7 @@ h3 {
 .text-container {
   padding-bottom: 2rem;
   padding-top: 0;
+  margin-bottom: 3rem;
 }
 
 .recipe-box {
