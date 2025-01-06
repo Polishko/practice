@@ -30,7 +30,7 @@ The challenge was to build a responsive recipe page based on two images provided
 ## My process
 
 - First I wrote the html.
-- Then I copied the provided images to Figma, where I measured the containers and checked the colors.
+- Then I used the provided images in Figma, where I measured the containers and checked the colors.
 - Then I styled each component.
 
 ### Built with
@@ -41,7 +41,7 @@ The challenge was to build a responsive recipe page based on two images provided
 
 ### What I learned
 
-I learned about variable fonts and had a reminder of basic html and css.
+I learned about variable fonts and had a reminder of some basic html and css concepts.
 
 ## Author
 
