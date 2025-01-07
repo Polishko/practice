@@ -26,6 +26,7 @@ function readLine() {
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
+// Solution start
 function plusMinus(arr) {
   // Write your code here
   const arrLength = arr.length;
@@ -37,6 +38,7 @@ function plusMinus(arr) {
   console.log((negativeFraction / arrLength).toFixed(6));
   console.log((zeroFraction / arrLength).toFixed(6));
 }
+//Solution end
 
 function main() {
   const n = parseInt(readLine().trim(), 10);
