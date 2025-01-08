@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .orange {
+        background: orange;
+      }
+      .green {
+        background: green;
+      }
+      .yellow {
+        background: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orange">
+      <div class="green">
+        <div class="yellow">He-he</div>
+      </div>
+    </div>
+    <script>
+      const divElements = document.querySelectorAll("div");
+      divElements.forEach((el) =>
+        el.addEventListener("click", logText, {
+          capture: true,
+        })
+      );
+      function logText(e) {
+        e.stopPropagation();
+        console.log(this, "clicked");
+      }
+    </script>
+  </body>
+</html>

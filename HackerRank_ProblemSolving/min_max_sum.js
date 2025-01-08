@@ -51,3 +51,5 @@ function main() {
 
   miniMaxSum(arr);
 }
+
+document.addEventListener();
