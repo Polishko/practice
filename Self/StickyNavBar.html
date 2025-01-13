@@ -1,0 +1,60 @@
+<!-- Part 3: Practical Layout Challenge
+Task: Create a navigation bar with the following:
+
+A logo on the left.
+Three menu items (Home, About, Contact) in the center.
+A search input on the right.
+Make the navigation bar sticky at the top of the page. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nav Bar</title>
+    <style>
+      body {
+        max-width: 1200px;
+        display: flex;
+        justify-content: center;
+        padding: 2em; /*avoid content overlapping with sticky nav bar*/
+      }
+
+      nav {
+        display: flex;
+        position: fixed;
+        width: 90%;
+        margin: 1em;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      ul {
+        display: flex;
+        gap: 1em;
+      }
+
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <figure>
+        <img src="path-to-logo" alt="Logo" />
+      </figure>
+
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+
+      <form method="get">
+        <label for="text">Search:</label>
+        <input type="text" id="text" />
+      </form>
+    </nav>
+  </body>
+</html>
