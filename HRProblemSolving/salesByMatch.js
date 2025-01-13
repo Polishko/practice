@@ -23,32 +23,44 @@ function readLine() {
 }
 
 /*
- * Complete the 'pageCount' function below.
+ * Complete the 'sockMerchant' function below.
  *
  * The function is expected to return an INTEGER.
  * The function accepts following parameters:
  *  1. INTEGER n
- *  2. INTEGER p
+ *  2. INTEGER_ARRAY ar
  */
 
-// Solution start
-function pageCount(n, p) {
+//Solution start
+function sockMerchant(n, ar) {
   // Write your code here
-  const nIndex = Math.floor(n / 2);
-  const pIndex = Math.floor(p / 2);
+  let sockPairs = {};
+  let count = 0;
 
-  return Math.min(pIndex - 0, nIndex - pIndex);
+  for (let sock of ar) {
+    sockPairs[sock] = (sockPairs[sock] || 0) + 1;
+
+    if (sockPairs[sock] === 2) {
+      count++;
+      sockPairs[sock] = 0;
+    }
+  }
+
+  return count;
 }
-// Solution end
+//Solution end
 
 function main() {
   const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
   const n = parseInt(readLine().trim(), 10);
 
-  const p = parseInt(readLine().trim(), 10);
+  const ar = readLine()
+    .replace(/\s+$/g, "")
+    .split(" ")
+    .map((arTemp) => parseInt(arTemp, 10));
 
-  const result = pageCount(n, p);
+  const result = sockMerchant(n, ar);
 
   ws.write(result + "\n");
 
