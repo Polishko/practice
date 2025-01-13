@@ -1,0 +1,13 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensures the body spans the full viewport height and doesn't collapse to content height*/
+  margin: 0; /*Resets default margin for consistent centering */
+}
+
+div {
+  width: 200px;
+  height: 100px;
+  background-color: lightgray;
+}
