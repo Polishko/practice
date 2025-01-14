@@ -32,8 +32,8 @@ let arr = [1, 2, 3, 4];
 console.log(squareNumbers(arr));
 
 // typeof null and NAN
-console.log(typeof null);
-console.log(typeof NAN);
+console.log(typeof null); // object
+console.log(typeof NaN); // number
 
 // Create button
 // const buttonElement = document.createElement('button');
