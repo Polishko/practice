@@ -1,24 +1,110 @@
+"use strict";
+
+const fs = require("fs");
+
+process.stdin.resume();
+process.stdin.setEncoding("utf-8");
+
+let inputString = "";
+let currentLine = 0;
+
+process.stdin.on("data", function (inputStdin) {
+  inputString += inputStdin;
+});
+
+process.stdin.on("end", function () {
+  inputString = inputString.split("\n");
+
+  main();
+});
+
+function readLine() {
+  return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'formingMagicSquare' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts 2D_INTEGER_ARRAY s as parameter.
+ */
+
+// Solution start
 function formingMagicSquare(s) {
-  // Write your code here
-  function findSum(arr) {
-    return arr.reduce((acc, curr) => acc + curr, 0);
+  const magicSquares = [
+    [
+      [8, 1, 6],
+      [3, 5, 7],
+      [4, 9, 2],
+    ],
+    [
+      [6, 1, 8],
+      [7, 5, 3],
+      [2, 9, 4],
+    ],
+    [
+      [4, 9, 2],
+      [3, 5, 7],
+      [8, 1, 6],
+    ],
+    [
+      [2, 9, 4],
+      [7, 5, 3],
+      [6, 1, 8],
+    ],
+    [
+      [8, 3, 4],
+      [1, 5, 9],
+      [6, 7, 2],
+    ],
+    [
+      [4, 3, 8],
+      [9, 5, 1],
+      [2, 7, 6],
+    ],
+    [
+      [6, 7, 2],
+      [1, 5, 9],
+      [8, 3, 4],
+    ],
+    [
+      [2, 7, 6],
+      [9, 5, 1],
+      [4, 3, 8],
+    ],
+  ];
+
+  let minCost = Infinity;
+
+  for (const magic of magicSquares) {
+    let cost = 0;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        cost += Math.abs(s[i][j] - magic[i][j]);
+      }
+    }
+    minCost = Math.min(cost, minCost);
   }
 
-  const col1 = [s[0][0], s[1][0], s[2][0]];
-  const col2 = [s[0][1], s[1][1], s[2][1]];
-  const col3 = [s[0][2], s[1][2], s[2][2]];
+  return minCost;
+}
+//Solution end
 
-  const diag1 = [s[0][0], s[1][1], s[2][2]];
-  const diag2 = [s[0][2], s[1][1], s[2][0]];
+function main() {
+  const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-  let line1Sum = findSum(s[0]);
-  let line2Sum = findSum(s[1]);
-  let line3Sum = findSum(s[2]);
-  let col1Sum = findSum(col1);
-  let col2Sum = findSum(col2);
-  let col3Sum = findSum(col3);
-  let diag1Sum = findSum(diag1);
-  let diag2Sum = findSum(diag2);
+  let s = Array(3);
 
-  const allSums = line1Sum;
+  for (let i = 0; i < 3; i++) {
+    s[i] = readLine()
+      .replace(/\s+$/g, "")
+      .split(" ")
+      .map((sTemp) => parseInt(sTemp, 10));
+  }
+
+  const result = formingMagicSquare(s);
+
+  ws.write(result + "\n");
+
+  ws.end();
 }
