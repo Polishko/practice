@@ -48,3 +48,9 @@ function validateForm() {
 }
 
 form.addEventListener("input", validateForm);
+
+// Validate if required fields are filled
+function validateForm(form) {
+  const inputs = Array.from(form.querySelectorAll("input[required]"));
+  return inputs.every((input) => input.value.trim() !== "");
+}
