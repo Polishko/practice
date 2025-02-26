@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script>
+            alert('Welcome to our shop!')
+            // const result = prompt('What are you looking for?')
+            // console.log(result)
+
+            const inventory = {
+                shoes: [
+                    {
+                        name: 'Sneaker',
+                        price: 100,
+                        colors: ['blue', 'black'],
+                        sizes: [40, 42, 44, 46]
+                    },
+                    {
+                        name: 'Running Shoes',
+                        price: 120,
+                        colors: ['red', 'white', 'black'],
+                        sizes: [38, 40, 42, 44]
+                    },
+                    {
+                        name: 'Loafers',
+                        price: 80,
+                        colors: ['brown', 'black'],
+                        sizes: [39, 41, 43, 45]
+                    },
+                    {
+                        name: 'Boots',
+                        price: 150,
+                        colors: ['tan', 'black', 'gray'],
+                        sizes: [40, 42, 44]
+                    },
+                    {
+                        name: 'Sandals',
+                        price: 60,
+                        colors: ['white', 'blue', 'brown'],
+                        sizes: [39, 41, 43, 45, 47]
+                    }
+                ],
+                pants: [
+                    {
+                        name: 'Jeans',
+                        price: 50,
+                        colors: ['blue', 'black'],
+                        sizes: [32, 34, 36]
+                    },
+                    {
+                        name: 'Chinos',
+                        price: 70,
+                        colors: ['beige', 'navy', 'gray'],
+                        sizes: [30, 32, 34, 36]
+                    },
+                    {
+                        name: 'Joggers',
+                        price: 60,
+                        colors: ['black', 'gray', 'olive'],
+                        sizes: [28, 30, 32, 34, 36]
+                    },
+                    {
+                        name: 'Cargo Pants',
+                        price: 80,
+                        colors: ['khaki', 'black', 'camo'],
+                        sizes: [30, 32, 34, 36, 38]
+                    },
+                    {
+                        name: 'Formal Trousers',
+                        price: 90,
+                        colors: ['black', 'gray', 'navy'],
+                        sizes: [30, 32, 34, 36, 38]
+                    }
+                ],
+            };
+
+            // to allow recreating message varriable again?
+            // 1. IIFE -- old way
+            // (() => {
+            //     let message = 'What are you looking for?';
+            // for (let i = 0; i < Object.keys(inventory).length; i++) {
+            //     message += '\n-' + Object.keys(inventory)[i];
+            // }
+
+            // prompt(message);
+            // }) ();
+
+            // 2. use JS modules -- preferred
+
+            // 3. put in a funct
+            function chooseCategory() {
+                let message = 'What are you looking for?';
+                for (let i = 0; i < Object.keys(inventory).length; i++) {
+                    message += '\n-' + Object.keys(inventory)[i];
+                }
+                const response = prompt(message);
+
+                if (!(response.toLowerCase() in inventory)) {
+                    return chooseCategory();
+                }
+
+                return response;
+            }
+
+            const category = chooseCategory();
+
+            function chooseItem(category) {
+                let message = 'What item are you looking for?';
+
+                for (let item of inventory[category]) {
+                    message += `\n- ${item.name}`;
+                }
+
+                const response = prompt(message);
+
+                for (let item of inventory[category]) {
+                    if (item.name.toLowerCase() === response.toLocaleLowerCase()) {
+                        return item;
+                    }
+                }
+
+                return chooseItem(category);
+            }
+
+            const item = chooseItem(category);
+            
+            function getSize(item) {
+                let message = 'What is your size?';
+
+                for (let size of item.sizes) {
+                    message += `\n- ${size}`;
+                }
+
+                const response = prompt(message);
+                const size = Number(response);
+
+                if (isNaN(size) || size <= 0 || size % 1 !== 0) {
+                    alert('Please enter a valid size!');
+                    return getSize(item);
+                }
+
+                return response;
+            }
+
+            const size = getSize(item);
+
+            function getShippingAddress() {
+                const response = prompt('Enter your shipping address!');
+
+                if (!response) {
+                    alert('Please enter your shipping address');
+                    return getShippingAddress();
+                }
+                
+                return response;
+
+            }
+
+            const shippingAddress = getShippingAddress();
+
+            function getBillingAddress() {
+                const response = prompt('Enter your billing address (leave empty to use billing address)')
+                return response;
+            }
+
+            const billingAddress = getBillingAddress () || shippingAddress;
+
+            const tax = 0.2;
+            const shipping = 0.1;
+            const additionalFees = item.price * (tax * 100 + shipping * 100) / 100;
+
+            // alert('The Final Price: ' + item.price + '+' + additionalFees + '=' + (item.price + additionalFees));
+            alert(`The Final Price: ${item.price} + ${additionalFees} = ${item.price + additionalFees}`);
+
+        </script>
+    </body>
+</html>
