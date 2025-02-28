@@ -102,10 +102,43 @@
 
 // write sum(a)(b) -> a + b
 
-function sum(a) {
-    return function f(b) {
-        return a + b;
-    }
+// function sum(a) {
+//     return function f(b) {
+//         return a + b;
+//     }
+// }
+
+// console.log(sum(5)(-1));
+
+
+// function byField(fieldName){
+//     return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
+//   }
+
+// counter using closure
+// function counter() {
+//     let count = 1;
+//     return function () {
+//       return count++; 
+//     }
+//  }
+
+//  const counter = (x=1) => () => x++;
+
+// Ask user for numerical outputs and return sum
+
+function sumInput() {
+  let arr = [];
+
+  while (true) {
+    let value = prompt('Enter a value', 0);
+
+    if (value === null || value === '' || !isFinite(value)) break;
+
+    arr.push(+value);
+  }
+
+  return arr.reduce((acc, curr) => acc + curr, 0);
 }
 
-console.log(sum(5)(-1));
+alert(sumInput());

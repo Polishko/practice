@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function sumInput() {
+  let arr = [];
+
+  while (true) {
+    let value = prompt('Enter a value', 0);
+
+    if (value === null || value === '' || !isFinite(value)) break;
+
+    arr.push(+value);
+  }
+
+  return arr.reduce((acc, curr) => acc + curr, 0);
+}
+
+alert(sumInput());
+
+    </script>
+</body>
+</html>

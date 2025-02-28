@@ -36,17 +36,30 @@
 //     { age: 99, name: 'vinny' },
 //     { age: 26, name: 'don' }])[0])
 
-function combine(...objects) {   
-    return objects.reduce((acc, obj) => {
-        for (let [key, val] of Object.entries(obj)) {
-            acc[key] = (acc[key] || 0) + val;
-        }
+// function combine(...objects) {   
+//     return objects.reduce((acc, obj) => {
+//         for (let [key, val] of Object.entries(obj)) {
+//             acc[key] = (acc[key] || 0) + val;
+//         }
 
-        return acc;
-    }, {});    
+//         return acc;
+//     }, {});    
+// }
+
+// const obj1 = { a: 10, b: 20, c: 30 };
+// const obj2 = { a: 3, c: 6, d: 3 };
+
+// console.log(combine(obj1, obj2));
+
+
+"use strict";
+
+function foo() {
+  foo = 1;
 }
+foo();
+console.log(foo);
 
-const obj1 = { a: 10, b: 20, c: 30 };
-const obj2 = { a: 3, c: 6, d: 3 };
-
-console.log(combine(obj1, obj2));
+(function foo() {
+    foo = 1; // TypeError: Assignment to constant variable.
+  })();
