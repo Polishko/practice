@@ -127,18 +127,54 @@
 
 // Ask user for numerical outputs and return sum
 
-function sumInput() {
-  let arr = [];
+// function sumInput() {
+//   let arr = [];
 
-  while (true) {
-    let value = prompt('Enter a value', 0);
+//   while (true) {
+//     let value = prompt('Enter a value', 0);
 
-    if (value === null || value === '' || !isFinite(value)) break;
+//     if (value === null || value === '' || !isFinite(value)) break;
 
-    arr.push(+value);
+//     arr.push(+value);
+//   }
+
+//   return arr.reduce((acc, curr) => acc + curr, 0);
+// }
+
+// alert(sumInput());
+
+// Get max sub-sum
+function getMaxSubSum(arr) {
+  if (arr.length === 1) return arr[0];
+
+  let maxSum = arr[0];
+  let sum = arr[0];
+  let start = 0;
+  let end = arr.length - 1;
+  let pointer = 0;
+
+  while (start <= end) {
+    if (start === end) {
+      start++;
+      sum = arr[start];
+      end = arr.length - 1;
+      pointer = start;
+    }
+    ++pointer;
+    if (pointer > end) {
+      if (sum > maxSum) {
+        maxSum = sum;
+      }
+      pointer = start;
+      end--;
+      sum = arr[start];
+      continue;
+    }
+    sum = sum + arr[pointer];
   }
 
-  return arr.reduce((acc, curr) => acc + curr, 0);
+
+  return maxSum;
 }
 
-alert(sumInput());
+console.log(getMaxSubSum([1, 2, 3]));

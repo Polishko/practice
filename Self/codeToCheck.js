@@ -54,12 +54,12 @@
 
 "use strict";
 
-function foo() {
-  foo = 1;
-}
-foo();
-console.log(foo);
+// function foo() {
+//   foo = 1;
+// }
+// foo();
+// console.log(foo);
 
-(function foo() {
-    foo = 1; // TypeError: Assignment to constant variable.
-  })();
+// (function foo() {
+//     foo = 1; // TypeError: Assignment to constant variable.
+//   })();
