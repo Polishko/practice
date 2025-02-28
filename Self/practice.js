@@ -143,7 +143,7 @@
 
 // alert(sumInput());
 
-// Get max sub-sum
+// Get max sub-sum, no for loop, O(n2) unfortunately :)
 function getMaxSubSum(arr) {
   if (arr.length === 1) return arr[0];
 
@@ -177,4 +177,19 @@ function getMaxSubSum(arr) {
   return maxSum;
 }
 
-console.log(getMaxSubSum([1, 2, 3]));
+// console.log(getMaxSubSum([1, 2, 3]));
+
+// camelize string
+function camelize(str) {
+  if (!str.includes('-')) return str;
+
+  return str.split('-').map((item, idx) => (idx > 0 ? item[0].toUpperCase() + item.slice(1) : item)).join('');
+}
+
+console.log(camelize("background-color"));
+console.log(camelize("list-style-image"));
+console.log(camelize("-webkit-transition"));
+
+// camelize("background-color") == 'backgroundColor';
+// camelize("list-style-image") == 'listStyleImage';
+// camelize("-webkit-transition") == 'WebkitTransition';
