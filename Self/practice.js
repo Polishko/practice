@@ -186,10 +186,35 @@ function camelize(str) {
   return str.split('-').map((item, idx) => (idx > 0 ? item[0].toUpperCase() + item.slice(1) : item)).join('');
 }
 
-console.log(camelize("background-color"));
-console.log(camelize("list-style-image"));
-console.log(camelize("-webkit-transition"));
+// console.log(camelize("background-color"));
+// console.log(camelize("list-style-image"));
+// console.log(camelize("-webkit-transition"));
 
-// camelize("background-color") == 'backgroundColor';
-// camelize("list-style-image") == 'listStyleImage';
-// camelize("-webkit-transition") == 'WebkitTransition';
+// extendable calculator
+function Calculator() {
+  this.operations = {
+    '-': (a, b) => a - b,
+    '+': (a, b) => a + b,
+  }
+
+  this.calculate = function(str) {
+    let [val1, operator, val2]= str.split(' ');
+
+    if (!this.operations[operator] || isNaN(val1) || isNaN(val2)) {
+      return NaN;
+    }
+
+    return this.operations[operator](val1, val2);
+  }
+
+  this.addMethod = function(name, func) {
+    this.operations[name] = this.operations[name] ? this.operations[name] : func;
+  }
+}
+
+let calc = new Calculator;
+console.log(calc.calculate('1 + 3'));
+let powerCalc = new Calculator;
+powerCalc.addMethod("/", (a, b) => a / b);
+console.log(powerCalc.calculate("2 / 3"));
+
