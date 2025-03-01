@@ -372,10 +372,6 @@ function range(start, stop, step) {
       return Array(stop - start).fill(start);
     }
 
-    // if ((stop < start && step > 0)) {
-    //   return [];
-    // }
-
     let rangeArr = [];
     for (let i = start; i < stop; i += step) {
       rangeArr.push(i);
@@ -393,5 +389,26 @@ function range(start, stop, step) {
 // console.log(range(2, 6, 2));
 // console.log(range(1, 5, 0));
 // console.log(range(0, 2, 0));
-console.log(range(2, 1));
+// console.log(range(2, 1));
 
+// Remove all occurrences of items of b from a (where a & b are arrays)
+function arrayDiff(a, b) {
+  for (item of b) {
+    while (true) {
+      let idx = a.indexOf(item);
+      if (idx === -1) break;
+      a.splice(idx, 1);
+    }
+  }
+  
+  return a;
+}
+
+// check in arr values are arr
+const arrCheck = function func(arr) {
+  return arr.every((value) => Array.isArray(value));
+};
+
+console.log(arrCheck([[1],[2]]));
+console.log(arrCheck(['1','2']));
+console.log(arrCheck([{1:1},{2:2}]));
