@@ -37,14 +37,14 @@
 //     { age: 26, name: 'don' }])[0])
 
 // Combine objects where values of shared keys are summed
-// function combine(...objects) {   
+// function combine(...objects) {
 //     return objects.reduce((acc, obj) => {
 //         for (let [key, val] of Object.entries(obj)) {
 //             acc[key] = (acc[key] || 0) + val;
 //         }
 
 //         return acc;
-//     }, {});    
+//     }, {});
 // }
 
 // const obj1 = { a: 10, b: 20, c: 30 };
@@ -55,50 +55,48 @@
 // Functions as params
 
 // function Adam() {
-//     return (arguments[0]) ? `Adam ${arguments[0]}`: "Adam."; 
+//     return (arguments[0]) ? `Adam ${arguments[0]}`: "Adam.";
 //   }
 
 // function has() {
-//     return (arguments[0]) ? `has ${arguments[0]}`: "has."; 
+//     return (arguments[0]) ? `has ${arguments[0]}`: "has.";
 //   }
 
 // function a() {
-//     return (arguments[0]) ? `a ${arguments[0]}`: "a."; 
+//     return (arguments[0]) ? `a ${arguments[0]}`: "a.";
 //   }
 
 // function dog() {
-//     return (arguments[0]) ? `dog ${arguments[0]}`: "dog."; 
+//     return (arguments[0]) ? `dog ${arguments[0]}`: "dog.";
 //   }
 
 // function The() {
-//     return (arguments[0]) ? `The ${arguments[0]}`: "The."; 
+//     return (arguments[0]) ? `The ${arguments[0]}`: "The.";
 //   }
 
 // function title() {
-//     return (arguments[0]) ? `title ${arguments[0]}`: "title."; 
+//     return (arguments[0]) ? `title ${arguments[0]}`: "title.";
 // }
 
 // function of() {
-//     return (arguments[0]) ? `of ${arguments[0]}`: "of."; 
+//     return (arguments[0]) ? `of ${arguments[0]}`: "of.";
 //   }
 
 // function the() {
-//     return (arguments[0]) ? `the ${arguments[0]}`: "the."; 
+//     return (arguments[0]) ? `the ${arguments[0]}`: "the.";
 //   }
 
 // function is() {
-//     return (arguments[0]) ? `is ${arguments[0]}`: "is."; 
+//     return (arguments[0]) ? `is ${arguments[0]}`: "is.";
 //   }
 
 // function also() {
-//     return (arguments[0]) ? `also ${arguments[0]}`: "also."; 
+//     return (arguments[0]) ? `also ${arguments[0]}`: "also.";
 //   }
-
 
 // console.log(Adam(has(a(dog()))));
 // console.log(The(title(of(the(dog(is(also(Adam()))))))));
 // // console.log(Adam())
-
 
 // write sum(a)(b) -> a + b
 
@@ -110,7 +108,6 @@
 
 // console.log(sum(5)(-1));
 
-
 // function byField(fieldName){
 //     return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
 //   }
@@ -119,7 +116,7 @@
 // function counter() {
 //     let count = 1;
 //     return function () {
-//       return count++; 
+//       return count++;
 //     }
 //  }
 
@@ -173,7 +170,6 @@ function getMaxSubSum(arr) {
     sum = sum + arr[pointer];
   }
 
-
   return maxSum;
 }
 
@@ -181,9 +177,14 @@ function getMaxSubSum(arr) {
 
 // camelize string
 function camelize(str) {
-  if (!str.includes('-')) return str;
+  if (!str.includes("-")) return str;
 
-  return str.split('-').map((item, idx) => (idx > 0 ? item[0].toUpperCase() + item.slice(1) : item)).join('');
+  return str
+    .split("-")
+    .map((item, idx) =>
+      idx > 0 ? item[0].toUpperCase() + item.slice(1) : item
+    )
+    .join("");
 }
 
 // console.log(camelize("background-color"));
@@ -193,28 +194,94 @@ function camelize(str) {
 // extendable calculator
 function Calculator() {
   this.operations = {
-    '-': (a, b) => a - b,
-    '+': (a, b) => a + b,
-  }
+    "-": (a, b) => a - b,
+    "+": (a, b) => a + b,
+  };
 
-  this.calculate = function(str) {
-    let [val1, operator, val2]= str.split(' ');
+  this.calculate = function (str) {
+    let [val1, operator, val2] = str.split(" ");
 
     if (!this.operations[operator] || isNaN(val1) || isNaN(val2)) {
       return NaN;
     }
 
-    return this.operations[operator](val1, val2);
-  }
+    return this.operations[operator](+val1, +val2);
+  };
 
-  this.addMethod = function(name, func) {
-    this.operations[name] = this.operations[name] ? this.operations[name] : func;
-  }
+  this.addMethod = function (name, func) {
+    this.operations[name] = this.operations[name]
+      ? this.operations[name]
+      : func;
+  };
 }
 
-let calc = new Calculator;
-console.log(calc.calculate('1 + 3'));
-let powerCalc = new Calculator;
-powerCalc.addMethod("/", (a, b) => a / b);
-console.log(powerCalc.calculate("2 / 3"));
+// let calc = new Calculator;
+// console.log(calc.calculate('1 + 3'));
+// let powerCalc = new Calculator;
+// powerCalc.addMethod("/", (a, b) => a / b);
+// console.log(powerCalc.calculate("2 / 3"));
 
+// map to user names
+let john = { name: "John", surname: "Smith", id: 1 };
+let pete = { name: "Pete", surname: "Hunt", id: 2 };
+let mary = { name: "Mary", surname: "Key", id: 3 };
+
+let users = [john, pete, mary];
+
+let usersMapped = users.map((user) => ({
+  fullName: `${user.name} ${user.surname}`,
+  id: user.id,
+}));
+
+// console.log( usersMapped[0].id ) // 1
+// console.log( usersMapped[0].fullName ) // John Smith
+
+// sort by age
+let kary = { name: "Kary", age: 25 };
+let gary = { name: "Gary", age: 30 };
+let perry = { name: "Perry", age: 28 };
+
+let arr = [ kary, gary, perry ];
+
+function sortByAge(arr) {
+  arr.sort((a, b) => a.age - b.age)
+}
+
+sortByAge(arr);
+
+// console.log(arr[0].name); // John
+// console.log(arr[1].name); // Mary
+// console.log(arr[2].name); // Pete
+
+// shuffle array
+let myArr = [1, 2, 3];
+
+function shuffle(myArr) {
+  let min;
+  let max;
+  let idx;
+  let removed;
+  let copy = myArr.slice();
+  let newArr = [];
+
+  while (copy.length > 0) {
+    min = Math.ceil(0);
+    max = Math.floor(copy.length - 1);
+
+    idx = Math.floor(Math.random() * (max - min + 1) + min);
+    removed = copy.splice(idx, 1);
+    newArr.push(removed[0]);
+  }
+  
+  return newArr;
+}
+
+console.log(shuffle(myArr));
+// arr = [3, 2, 1]
+
+console.log(shuffle(myArr));
+// arr = [2, 1, 3]
+
+console.log(shuffle(myArr));
+// arr = [3, 1, 2]
+// ...
