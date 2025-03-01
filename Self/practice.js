@@ -343,12 +343,12 @@ let usersArr = [
 function groupById(arr) {
   return arr.reduce((obj, value) => {
     obj[value.id] = value;
-    return obj
+    return obj;
   }, {})
 }
 
 let usersById = groupById(usersArr);
-console.log(usersById);
+// console.log(usersById);
 
 /*
 // after the call we should have:
@@ -359,4 +359,39 @@ usersById = {
   pete: {id: 'pete', name: "Pete Peterson", age: 31},
 }
 */
+
+// range funct
+function range(start, stop, step) {
+
+  if (arguments.length === 1) {
+    return range(0, arguments[0], 1);
+  } else if (arguments.length === 2) {
+    return range(arguments[0], arguments[1], 1);
+  } else {
+    if (step === 0) {
+      return Array(stop - start).fill(start);
+    }
+
+    // if ((stop < start && step > 0)) {
+    //   return [];
+    // }
+
+    let rangeArr = [];
+    for (let i = start; i < stop; i += step) {
+      rangeArr.push(i);
+    }
+
+    return rangeArr;
+  }
+}
+
+// console.log(range(1));
+// console.log(range(1, 5));
+// console.log(range(1));
+// console.log(range(1, 1, 1));
+// console.log(range(1, 2, 1));
+// console.log(range(2, 6, 2));
+// console.log(range(1, 5, 0));
+// console.log(range(0, 2, 0));
+console.log(range(2, 1));
 
