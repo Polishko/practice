@@ -409,6 +409,16 @@ const arrCheck = function func(arr) {
   return arr.every((value) => Array.isArray(value));
 };
 
-console.log(arrCheck([[1],[2]]));
-console.log(arrCheck(['1','2']));
-console.log(arrCheck([{1:1},{2:2}]));
+// console.log(arrCheck([[1],[2]]));
+// console.log(arrCheck(['1','2']));
+// console.log(arrCheck([{1:1},{2:2}]));
+
+
+// find unique
+function findUniq(arr) {
+  arr.sort((a, b) => a - b);
+  return arr[0] == arr[1] ? arr[arr.length - 1] : arr[0];
+}
+
+console.log(findUniq([ 0, 0, 0.55, 0, 0 ]) );
+// console.log(findUniq([ 1, 1, 1, 2, 1, 1 ]));
