@@ -420,5 +420,39 @@ function findUniq(arr) {
   return arr[0] == arr[1] ? arr[arr.length - 1] : arr[0];
 }
 
-console.log(findUniq([ 0, 0, 0.55, 0, 0 ]) );
+// console.log(findUniq([ 0, 0, 0.55, 0, 0 ]) );
 // console.log(findUniq([ 1, 1, 1, 2, 1, 1 ]));
+
+let str = "1.1";
+// console.log(+str);
+
+
+function solve(arr){
+  arr.sort((a, b) => b - a);
+  left = 0;
+  right = arr.length - 1
+
+  let newArr = [];
+  while (left <= right) {
+    if (left != right) newArr.push(arr[left]);
+    newArr.push(arr[right]);
+    left++;
+    right--;    
+  }
+
+  return newArr;
+}
+
+  // arr.sort((a, b) => b - a);
+  // len = arr.length % 2 === 0 ? Math.ceil(arr.length / 2) : Math.ceil(arr.length / 2) + 1;
+
+  // for (i = 0; i <= len; i+=2) {
+  //   arr.splice(i + 1, 0, arr.pop());
+  // }
+
+  // return arr;
+// }
+
+// console.log(solve([15,11,10,7,12]));
+console.log(solve([87, 80, 79, 78, 74, 63, 52, 31, 16]));
+// At some point, the elements towards the middle start shifting slightly because splice() moves the unprocessed elements one index further each time.
