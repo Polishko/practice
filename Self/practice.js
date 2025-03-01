@@ -294,7 +294,7 @@ function unbiasedSuffle(myArr) {
   return myArr
 }
 
-console.log(unbiasedSuffle(myArr));
+// console.log(unbiasedSuffle(myArr));
 // arr = [3, 2, 1]
 
 // console.log(unbiasedSuffle(myArr));
@@ -303,3 +303,60 @@ console.log(unbiasedSuffle(myArr));
 // console.log(unbiasedSuffle(myArr));
 // // arr = [3, 1, 2]
 // // ...
+
+// average
+let alice = { name: "Alice", age: 25 };
+let pan = { name: "Pan", age: 30 };
+let feya = { name: "Feya", age: 29 };
+
+let someArr = [ alice, pan, feya ];
+
+function getAverageAge(arr) {
+  return arr.reduce((acc, curr) => (acc + curr.age), 0) / arr.length;
+}
+
+// console.log(getAverageAge(someArr)); // (25 + 30 + 29) / 3 = 28
+
+// unique elements
+function unique(strings) {
+  let result = [];
+  for (str of strings) {
+    if (!result.includes(str)) result.push(str);
+  }
+  
+  return result.join(', ');
+}
+
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+// console.log( unique(strings) ); // Hare, Krishna, :-O
+
+// user data group
+let usersArr = [
+  {id: 'john', name: "John Smith", age: 20},
+  {id: 'ann', name: "Ann Smith", age: 24},
+  {id: 'pete', name: "Pete Peterson", age: 31},
+];
+
+function groupById(arr) {
+  return arr.reduce((obj, value) => {
+    obj[value.id] = value;
+    return obj
+  }, {})
+}
+
+let usersById = groupById(usersArr);
+console.log(usersById);
+
+/*
+// after the call we should have:
+
+usersById = {
+  john: {id: 'john', name: "John Smith", age: 20},
+  ann: {id: 'ann', name: "Ann Smith", age: 24},
+  pete: {id: 'pete', name: "Pete Peterson", age: 31},
+}
+*/
+
