@@ -257,7 +257,6 @@ sortByAge(arr);
 let myArr = [1, 2, 3];
 
 function shuffle(myArr) {
-  let min;
   let max;
   let idx;
   let removed;
@@ -265,10 +264,9 @@ function shuffle(myArr) {
   let newArr = [];
 
   while (copy.length > 0) {
-    min = Math.ceil(0);
     max = Math.floor(copy.length - 1);
 
-    idx = Math.floor(Math.random() * (max - min + 1) + min);
+    idx = Math.floor(Math.random() * (max + 1));
     removed = copy.splice(idx, 1);
     newArr.push(removed[0]);
   }
@@ -276,12 +274,32 @@ function shuffle(myArr) {
   return newArr;
 }
 
-console.log(shuffle(myArr));
+// console.log(shuffle(myArr));
+// // arr = [3, 2, 1]
+
+// console.log(shuffle(myArr));
+// // arr = [2, 1, 3]
+
+// console.log(shuffle(myArr));
+// // arr = [3, 1, 2]
+// // ...
+
+// recommended: Fisher-Yates shuffle, unbiased & optimized
+function unbiasedSuffle(myArr) {
+  for (let i = myArr.length - 1; i > 0; i--) {
+    let j  = Math.floor(Math.random() * (i + 1));
+    [myArr[i], myArr[j]] = [myArr[j], myArr[i]];
+  }
+
+  return myArr
+}
+
+console.log(unbiasedSuffle(myArr));
 // arr = [3, 2, 1]
 
-console.log(shuffle(myArr));
-// arr = [2, 1, 3]
+// console.log(unbiasedSuffle(myArr));
+// // arr = [2, 1, 3]
 
-console.log(shuffle(myArr));
-// arr = [3, 1, 2]
-// ...
+// console.log(unbiasedSuffle(myArr));
+// // arr = [3, 1, 2]
+// // ...
