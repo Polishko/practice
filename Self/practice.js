@@ -454,5 +454,20 @@ function solve(arr){
 // }
 
 // console.log(solve([15,11,10,7,12]));
-console.log(solve([87, 80, 79, 78, 74, 63, 52, 31, 16]));
+// console.log(solve([87, 80, 79, 78, 74, 63, 52, 31, 16]));
 // At some point, the elements towards the middle start shifting slightly because splice() moves the unprocessed elements one index further each time.
+
+// flatten array
+
+function flattenNestedArray(arr) {
+  // return arr.reduce((acc, curr) => {
+  //   acc.push(...curr);
+  //   return acc;
+  // }, []);
+
+  // alternative
+  return arr.reduce((acc, curr) => acc.concat(curr), []);
+  
+}
+
+console.log(flattenNestedArray([[10], [20, 30], [40, 50, 60]]));
