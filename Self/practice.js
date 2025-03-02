@@ -241,10 +241,10 @@ let kary = { name: "Kary", age: 25 };
 let gary = { name: "Gary", age: 30 };
 let perry = { name: "Perry", age: 28 };
 
-let arr = [ kary, gary, perry ];
+let arr = [kary, gary, perry];
 
 function sortByAge(arr) {
-  arr.sort((a, b) => a.age - b.age)
+  arr.sort((a, b) => a.age - b.age);
 }
 
 sortByAge(arr);
@@ -270,7 +270,7 @@ function shuffle(myArr) {
     removed = copy.splice(idx, 1);
     newArr.push(removed[0]);
   }
-  
+
   return newArr;
 }
 
@@ -287,11 +287,11 @@ function shuffle(myArr) {
 // recommended: Fisher-Yates shuffle, unbiased & optimized
 function unbiasedSuffle(myArr) {
   for (let i = myArr.length - 1; i > 0; i--) {
-    let j  = Math.floor(Math.random() * (i + 1));
+    let j = Math.floor(Math.random() * (i + 1));
     [myArr[i], myArr[j]] = [myArr[j], myArr[i]];
   }
 
-  return myArr
+  return myArr;
 }
 
 // console.log(unbiasedSuffle(myArr));
@@ -309,10 +309,10 @@ let alice = { name: "Alice", age: 25 };
 let pan = { name: "Pan", age: 30 };
 let feya = { name: "Feya", age: 29 };
 
-let someArr = [ alice, pan, feya ];
+let someArr = [alice, pan, feya];
 
 function getAverageAge(arr) {
-  return arr.reduce((acc, curr) => (acc + curr.age), 0) / arr.length;
+  return arr.reduce((acc, curr) => acc + curr.age, 0) / arr.length;
 }
 
 // console.log(getAverageAge(someArr)); // (25 + 30 + 29) / 3 = 28
@@ -323,28 +323,36 @@ function unique(strings) {
   for (str of strings) {
     if (!result.includes(str)) result.push(str);
   }
-  
-  return result.join(', ');
+
+  return result.join(", ");
 }
 
-let strings = ["Hare", "Krishna", "Hare", "Krishna",
-  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+let strings = [
+  "Hare",
+  "Krishna",
+  "Hare",
+  "Krishna",
+  "Krishna",
+  "Krishna",
+  "Hare",
+  "Hare",
+  ":-O",
 ];
 
 // console.log( unique(strings) ); // Hare, Krishna, :-O
 
 // user data group
 let usersArr = [
-  {id: 'john', name: "John Smith", age: 20},
-  {id: 'ann', name: "Ann Smith", age: 24},
-  {id: 'pete', name: "Pete Peterson", age: 31},
+  { id: "john", name: "John Smith", age: 20 },
+  { id: "ann", name: "Ann Smith", age: 24 },
+  { id: "pete", name: "Pete Peterson", age: 31 },
 ];
 
 function groupById(arr) {
   return arr.reduce((obj, value) => {
     obj[value.id] = value;
     return obj;
-  }, {})
+  }, {});
 }
 
 let usersById = groupById(usersArr);
@@ -362,7 +370,6 @@ usersById = {
 
 // range funct
 function range(start, stop, step) {
-
   if (arguments.length === 1) {
     return range(0, arguments[0], 1);
   } else if (arguments.length === 2) {
@@ -400,7 +407,7 @@ function arrayDiff(a, b) {
       a.splice(idx, 1);
     }
   }
-  
+
   return a;
 }
 
@@ -412,7 +419,6 @@ const arrCheck = function func(arr) {
 // console.log(arrCheck([[1],[2]]));
 // console.log(arrCheck(['1','2']));
 // console.log(arrCheck([{1:1},{2:2}]));
-
 
 // find unique
 function findUniq(arr) {
@@ -426,31 +432,30 @@ function findUniq(arr) {
 let str = "1.1";
 // console.log(+str);
 
-
-function solve(arr){
+function solve(arr) {
   arr.sort((a, b) => b - a);
   left = 0;
-  right = arr.length - 1
+  right = arr.length - 1;
 
   let newArr = [];
   while (left <= right) {
     if (left != right) newArr.push(arr[left]);
     newArr.push(arr[right]);
     left++;
-    right--;    
+    right--;
   }
 
   return newArr;
 }
 
-  // arr.sort((a, b) => b - a);
-  // len = arr.length % 2 === 0 ? Math.ceil(arr.length / 2) : Math.ceil(arr.length / 2) + 1;
+// arr.sort((a, b) => b - a);
+// len = arr.length % 2 === 0 ? Math.ceil(arr.length / 2) : Math.ceil(arr.length / 2) + 1;
 
-  // for (i = 0; i <= len; i+=2) {
-  //   arr.splice(i + 1, 0, arr.pop());
-  // }
+// for (i = 0; i <= len; i+=2) {
+//   arr.splice(i + 1, 0, arr.pop());
+// }
 
-  // return arr;
+// return arr;
 // }
 
 // console.log(solve([15,11,10,7,12]));
@@ -460,14 +465,37 @@ function solve(arr){
 // flatten array
 
 function flattenNestedArray(arr) {
-  // return arr.reduce((acc, curr) => {
-  //   acc.push(...curr);
-  //   return acc;
-  // }, []);
+  return arr.reduce((acc, curr) => {
+    acc.push(...curr);
+    return acc;
+  }, []);
 
   // alternative
   return arr.reduce((acc, curr) => acc.concat(curr), []);
-  
 }
 
-console.log(flattenNestedArray([[10], [20, 30], [40, 50, 60]]));
+// console.log(flattenNestedArray([[10], [20, 30], [40, 50, 60]]));
+
+// diagonal modification
+function matrix(array) {
+  let copy = array.slice();
+
+  for (let i = 0; i < copy.length; i++) {
+    copy[i][i] = copy[i][i] >= 0 ? 1 : 0;
+  }
+
+  return copy;
+}
+
+// Create N dimentional array
+const createNDimensionalArray = (n, size, count = 1) => {
+  if (n === 1) {
+    return Array(size).fill(`level ${count}`);
+  }
+
+  count += 1;
+  return Array(size).fill(createNDimensionalArray(n - 1, size, count));
+};
+
+// console.log(JSON.stringify(createNDimensionalArray(2, 3), null, 2));
+// console.log(JSON.stringify(createNDimensionalArray(3, 2), null, 2));
