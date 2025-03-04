@@ -580,7 +580,6 @@ function Clock({ template }) {
 // let clock = new Clock({ template: "h:m:s" });
 // clock.start();
 
-
 // Make private prop accessible from derived classes
 // class Class {
 //   static #foo = 42;
@@ -594,17 +593,15 @@ class Class {
 
   static get foo() {
     return Class.#foo;
-  } 
+  }
 }
 
 // Fix Rabbit
 
 class Animal {
-
   constructor(name) {
     this.name = name;
   }
-
 }
 
 class Rabbit extends Animal {
@@ -618,52 +615,157 @@ let rabbit = new Rabbit("White Rabbit"); // Error: this is not defined
 // console.log(rabbit.name);
 
 // Extended Clock
-class Clock {
-  constructor({ template }) {
-    this.template = template;
-  }
+// class Clock {
+//   constructor({ template }) {
+//     this.template = template;
+//   }
 
-  render() {
-    let date = new Date();
+//   render() {
+//     let date = new Date();
 
-    let hours = date.getHours();
-    if (hours < 10) hours = '0' + hours;
+//     let hours = date.getHours();
+//     if (hours < 10) hours = "0" + hours;
 
-    let mins = date.getMinutes();
-    if (mins < 10) mins = '0' + mins;
+//     let mins = date.getMinutes();
+//     if (mins < 10) mins = "0" + mins;
 
-    let secs = date.getSeconds();
-    if (secs < 10) secs = '0' + secs;
+//     let secs = date.getSeconds();
+//     if (secs < 10) secs = "0" + secs;
 
-    let output = this.template
-      .replace('h', hours)
-      .replace('m', mins)
-      .replace('s', secs);
+//     let output = this.template
+//       .replace("h", hours)
+//       .replace("m", mins)
+//       .replace("s", secs);
 
-    console.log(output);
-  }
+//     console.log(output);
+//   }
 
-  stop() {
-    clearInterval(this.timer);
-  }
+//   stop() {
+//     clearInterval(this.timer);
+//   }
 
-  start() {
-    this.render();
-    this.timer = setInterval(() => this.render(), 1000);
-  }
-}
+//   start() {
+//     this.render();
+//     this.timer = setInterval(() => this.render(), 1000);
+//   }
+// }
 
 // Create a new class ExtendedClock that inherits from Clock
 // and adds the parameter precision – the number of ms between “ticks”. Should be 1000 (1 second) by default.
 
-class ExtendedClock extends Clock {
-  constructor({ template, precision=1000 }) {
-    super({template});
-    this.precision = precision;
-  }
+// class ExtendedClock extends Clock {
+//   constructor({ template, precision=1000 }) {
+//     super({template});
+//     this.precision = precision;
+//   }
 
-  start() {
-    this.render();
-    this.timer = setInterval(() => this.render(), this.precision);
+//   start() {
+//     this.render();
+//     this.timer = setInterval(() => this.render(), this.precision);
+//   }
+// }
+
+// Working with prototype
+let animal = {
+  jumps: null,
+};
+let cat = {
+  __proto__: animal,
+  jumps: true,
+};
+
+// alert( cat.jumps ); // true
+
+// delete cat.jumps;
+
+// alert( cat.jumps ); // null
+
+// delete animal.jumps;
+
+// alert( cat.jumps ); // undefined
+
+// Searching algo
+
+let head = {
+  glasses: 1,
+};
+
+let table = {
+  __proto__: head,
+  pen: 3,
+};
+
+let bed = {
+  __proto__: table,
+  sheet: 1,
+  pillow: 2,
+};
+
+let pockets = {
+  __proto__: bed,
+  money: 2000,
+};
+
+// Use __proto__ to assign prototypes in a way that any property lookup will follow the path: pockets → bed → table → head.
+// For instance, pockets.pen should be 3 (found in table), and bed.glasses should be 1 (found in head).
+// Answer the question: is it faster to get glasses as pockets.glasses or head.glasses? Benchmark if needed.
+
+// Why are both hamsters full?
+// We have two hamsters: speedy and lazy inheriting from the general hamster object.
+// When we feed one of them, the other one is also full. Why? How can we fix it?
+
+let hamster = {
+  stomach: [],
+
+  eat(food) {
+    // this.stomach.push[food]; // console.log(speedy.hasOwnProperty("stomach")); --> false
+    this.stomach = [food]; // console.log(speedy.hasOwnProperty("stomach")); --> true
+  },
+};
+
+let speedy = {
+  __proto__: hamster,
+};
+
+let lazy = {
+  __proto__: hamster,
+};
+
+// console.log(speedy.hasOwnProperty("stomach"));
+// // This one found the food
+// speedy.eat("apple");
+// console.log(speedy.stomach); // apple
+// console.log(speedy.hasOwnProperty("stomach"));
+
+// // This one also has it, why? fix please.
+// console.log(lazy.stomach); // apple
+
+// Dictionary
+
+// var WordDictionary = function () {
+//   this.words = [];
+// };
+
+// WordDictionary.prototype.addWord = function (word) {
+//   this.words.push(word);
+// };
+
+// WordDictionary.prototype.search = function (word) {
+//   const pattern = new RegExp(`^${word}$`);
+//   return this.words.some((w) => pattern.test(w));
+// };
+
+class WordDictionary {
+  constructor () {
+    this.words = [];
+  }
+  
+  addWord(word) {
+    this.words.push(word);
+  }
+  
+  search(word) {
+    const pattern = new RegExp(`^${word}$`);
+    return this.words.some((w) => pattern.test(w));
   }
 }
