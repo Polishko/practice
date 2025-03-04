@@ -756,16 +756,89 @@ let lazy = {
 // };
 
 class WordDictionary {
-  constructor () {
+  constructor() {
     this.words = [];
   }
-  
+
   addWord(word) {
     this.words.push(word);
   }
-  
+
   search(word) {
     const pattern = new RegExp(`^${word}$`);
     return this.words.some((w) => pattern.test(w));
   }
 }
+
+//
+const person = {
+  name: "ram",
+  age: 22,
+  // greet : () =>{
+  //     return `Hello , you are ${this.age} years old`; --> undefined age
+  // }
+  greet() {
+    return `Hello , you are ${this.age} years old`;
+  },
+};
+// console.log(person.greet());
+
+// Function prop after bind
+function sayHi() {
+  alert(this.name);
+}
+sayHi.test = 5;
+let bound = sayHi.bind({
+  name: "John",
+});
+// console.log(bound.test);
+
+// Losing bind
+function askPassword(ok, fail) {
+  // let password = prompt("Password?", '');
+  let password = "rockstar";
+  if (password == "rockstar") ok();
+  else fail();
+}
+
+let user = {
+  name: "John",
+
+  loginOk() {
+    console.log(`${this.name} logged in`);
+  },
+
+  loginFail() {
+    console.log(`${this.name} failed to log in`);
+  },
+};
+
+// askPassword(user.loginOk, user.loginFail);
+// askPassword(user.loginOk.bind(user), user.loginFail.bind(user)); // solution 1
+// askPassword(() => user.loginOk, () => user.loginFail);
+
+//
+
+function askPassword(ok, fail) {
+  // let password = prompt("Password?", '');
+  let password = "rockstar";
+  if (password == "rockstar") ok();
+  else fail();
+}
+
+let user2 = {
+  name: "John",
+
+  login(result) {
+    console.log(this.name + (result ? " logged in" : " failed to log in"));
+  },
+};
+
+// Solution 1
+// askPassword(
+//   () => user2.login(true),
+//   () => user2.login(false)
+// );
+
+// Solution 2
+// askPassword(user2.login.bind(user, true), user2.login(user, false));
