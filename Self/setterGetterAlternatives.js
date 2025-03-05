@@ -71,8 +71,8 @@ class NamedOne3 {
   }
 }
 
-let namedOne = new NamedOne("Naomi", "Wang");
-console.log(namedOne.fullName);
-namedOne.firstName = "John";
-namedOne.lastName = "Doe";
-console.log(namedOne.fullName);
+// let namedOne = new NamedOne("Naomi", "Wang");
+// console.log(namedOne.fullName);
+// namedOne.firstName = "John";
+// namedOne.lastName = "Doe";
+// console.log(namedOne.fullName);
