@@ -842,3 +842,49 @@ let user2 = {
 
 // Solution 2
 // askPassword(user2.login.bind(user, true), user2.login(user, false));
+
+//
+const module2 = {
+  x: 42,
+  getX: function () {
+    return this.x;
+  },
+};
+
+const unboundGetX = module2.getX;
+// console.log(unboundGetX()); // The function gets invoked at the global scope
+// Expected output: undefined
+
+const boundGetX = unboundGetX.bind(module2);
+// console.log(boundGetX());
+// Expected output: 42
+
+// Convert to class
+// function greet(myName, yourName) {
+//   return `Hello ${yourName}, my name is ${myName}`;
+// }
+
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet(yourName) {
+    return `Hello ${yourName}, my name is ${this.name}`;
+  }
+}
+
+// Correct code
+function NameMe(first, last) {
+  this.firstName = first;
+  this.lastName = last;
+  this.name = this.firstName + " " + this.lastName;
+  // return { name: this.firstName + " " + this.lastName };
+}
+
+var n = new NameMe("John", "Doe");
+// console.log(n.firstName); //Expected: John
+// console.log(n.lastName); //Expected: Doe
+// console.log(n.name); //Expected: John Doe
+
+
