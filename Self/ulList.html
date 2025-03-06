@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <ul>
+      <li>
+        Animals
+        <ul>
+          <li>
+            Mammals
+            <ul>
+              <li>Cows</li>
+              <li>Donkeys</li>
+              <li>Dogs</li>
+              <li>Tigers</li>
+            </ul>
+          </li>
+          <li>
+            Other
+            <ul>
+              <li>Snakes</li>
+              <li>Birds</li>
+              <li>Lizards</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Fishes
+        <ul>
+          <li>
+            Aquarium
+            <ul>
+              <li>Guppy</li>
+              <li>Angelfish</li>
+            </ul>
+          </li>
+          <li>
+            Sea
+            <ul>
+              <li>Sea trout</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <script>
+      // ... your code...
+      const liElements = document.querySelectorAll("li");
+      const nodeList = Array.from(liElements);
+      for (let li of nodeList) {
+        const p = document.createElement("p");
+        p.textContent = li.textContent;
+        const div = document.createElement("div");
+        div.appendChild(p);
+        const body = document.querySelector("body");
+        body.appendChild(div);
+      }
+      // Array.from(liElements).forEach(ele => console.log(ele.textContent));
+      console.log(liElements.length);
+      console.dir(liElements);
+    </script>
+  </body>
+</html>
