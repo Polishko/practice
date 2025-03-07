@@ -3,40 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <style>
-      .title.expanded::before {
+      .menu ul {
+        display: none;
+      }
+
+      .menu.open ul {
+        display: block;
+      }
+
+      .menu .title::before {
         content: "▶";
       }
 
-      .title.collapsed::before {
+      .menu.open .title::before {
         content: "▼";
       }
     </style>
   </head>
   <body>
-    <span class="title collapsed"> Sweeties (click me)!</span>
+    <div class="menu">
+      <span class="title"> Sweeties (click me)!</span>
 
-    <ul style="display: none">
-      <li>Cake</li>
-      <li>Donut</li>
-      <li>Honey</li>
-    </ul>
+      <ul>
+        <li>Cake</li>
+        <li>Donut</li>
+        <li>Honey</li>
+      </ul>
+    </div>
 
     <script>
-      const clickElement = document.querySelector(".title");
-      let ulElement = document.querySelector("ul");
-
-      clickElement.addEventListener("click", toggleMenu);
+      const menuElement = document.querySelector(".menu");
+      menuElement.addEventListener("click", toggleMenu);
 
       function toggleMenu() {
-        if (ulElement.style.display === "none") {
-          ulElement.style.display = "block";
-          clickElement.classList.remove("collapsed");
-          clickElement.classList.add("expanded");
-        } else {
-          ulElement.style.display = "none";
-          clickElement.classList.remove("expanded");
-          clickElement.classList.add("collapsed");
-        }
+        menuElement.classList.toggle("open");
       }
     </script>
   </body>
