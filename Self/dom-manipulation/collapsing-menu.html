@@ -2,26 +2,41 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <style>
+      .title.expanded::before {
+        content: "▶";
+      }
+
+      .title.collapsed::before {
+        content: "▼";
+      }
+    </style>
   </head>
   <body>
-    <span id="click">▶ ▼ Sweeties (click me)!</span>
+    <span class="title collapsed"> Sweeties (click me)!</span>
 
-    <ul>
+    <ul style="display: none">
       <li>Cake</li>
       <li>Donut</li>
       <li>Honey</li>
     </ul>
 
     <script>
-      const clickElement = document.getElementById("click");
-
+      const clickElement = document.querySelector(".title");
       let ulElement = document.querySelector("ul");
-      let ulContent = ulElement.innerHTML;
 
       clickElement.addEventListener("click", toggleMenu);
 
       function toggleMenu() {
-        ulElement.innerHTML = ulElement.innerHTML === "" ? ulContent : "";
+        if (ulElement.style.display === "none") {
+          ulElement.style.display = "block";
+          clickElement.classList.remove("collapsed");
+          clickElement.classList.add("expanded");
+        } else {
+          ulElement.style.display = "none";
+          clickElement.classList.remove("expanded");
+          clickElement.classList.add("collapsed");
+        }
       }
     </script>
   </body>
