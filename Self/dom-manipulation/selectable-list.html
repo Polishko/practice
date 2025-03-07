@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .selected {
+        background: #0f0;
+      }
+
+      span {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    Click on a list item to select it.
+    <br />
+
+    <ul id="ul">
+      <li><span>Christopher Robin</span></li>
+      <li><span>Winnie-the-Pooh</span></li>
+      <li><span>Tigger</span></li>
+      <li><span>Kanga</span></li>
+      <li><span>Rabbit. Just rabbit.</span></li>
+    </ul>
+
+    <script>
+      // ...your code...
+      let spanElements = document.querySelectorAll("span");
+
+      for (let span of spanElements) {
+        span.addEventListener("mousedown", () => false);
+        span.addEventListener("click", selectElement);
+      }
+
+      function selectElement(e) {
+        e.currentTarget.closest("li").classList.add("selected");
+
+        if (e.ctrlKey || e.metaKey) {
+          e.currentTarget.closest("li").classList.remove("selected");
+        }
+      }
+    </script>
+  </body>
+</html>
