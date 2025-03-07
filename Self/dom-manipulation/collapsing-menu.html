@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="click">▶ ▼ Sweeties (click me)!</button>
+
+    <ul>
+      <li>Cake</li>
+      <li>Donut</li>
+      <li>Honey</li>
+    </ul>
+
+    <script>
+      const clickElement = document.getElementById("click");
+
+      let ulElement = document.querySelector("ul");
+      let ulContent = ulElement.innerHTML;
+
+      clickElement.addEventListener("click", toggleMenu);
+
+      function toggleMenu() {
+        ulElement.innerHTML = ulElement.innerHTML === "" ? ulContent : "";
+      }
+    </script>
+  </body>
+</html>
