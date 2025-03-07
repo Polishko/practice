@@ -41,8 +41,8 @@
         ball.style.position = "absolute";
 
         let fieldRect = field.getBoundingClientRect();
-        let newX = e.clientX - fieldRect.left - ballMidX;
-        let newY = e.clientY - fieldRect.top - ballMidY;
+        let newX = e.clientX - fieldRect.left - field.clientLeft - ballMidX;
+        let newY = e.clientY - fieldRect.top - field.clientTop - ballMidY;
 
         if (newX < 0) newX = 0;
         if (newX + ball.offsetWidth > field.clientWidth) {
