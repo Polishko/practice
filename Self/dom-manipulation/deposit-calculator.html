@@ -21,12 +21,12 @@
   </head>
 
   <body>
-    Deposit calculator.
+    initial calculator.
 
     <form name="calculator">
       <table>
         <tr>
-          <td>Initial deposit</td>
+          <td>Initial initial</td>
           <td>
             <input name="money" type="number" value="10000" required />
           </td>
@@ -79,45 +79,29 @@
       let form = document.forms.calculator;
 
       // your code
-      let depositElement = document.querySelector("[name=money]");
-      let selectionElement = document.querySelector("[name=months]");
-      let interestElement = document.querySelector("[name=interest]");
-      let heightAfterElement = document.getElementById("height-after");
-      let initialBox = document.getElementById("money-before");
-      let finalBox = document.getElementById("money-after");
+      form.money.addEventListener("input", calculate);
+      form.months.addEventListener("change", calculate);
+      form.interest.addEventListener("input", calculate);
 
-      let deposit = parseFloat(depositElement.value);
-      let years = parseFloat(selectionElement.value) / 12;
-      let interest = parseFloat(interestElement.value) * 0.01;
+      function calculate() {
+        let initial = +form.money.value;
+        if (!initial) return;
 
-      depositElement.addEventListener("input", () => {
-        deposit = parseFloat(depositElement.value) || 0;
-        updateHeight();
-      });
+        let years = form.months.value / 12;
+        if (!years) return;
 
-      selectionElement.addEventListener("change", (e) => {
-        years = parseFloat(e.target.value) / 12 || 0;
-        updateHeight();
-      });
+        let interest = form.interest.value * 0.01;
+        if (!interest) return;
 
-      interestElement.addEventListener("input", () => {
-        interest = parseFloat(interestElement.value) * 0.01 || 0;
-        updateHeight();
-      });
+        let result = Math.round(initial * (1 + interest) ** years);
 
-      function updateHeight() {
-        if (deposit > 0 && interest >= 0 && years > 0) {
-          let result = parseInt(Math.round(deposit * (1 + interest) ** years));
-
-          let heightAfter = parseInt(result / deposit) * 100;
-          heightAfterElement.style.height = `${heightAfter}px`;
-
-          initialBox.textContent = deposit;
-          finalBox.textContent = result;
-        }
+        let heightAfter = (result / initial) * 100 + "px";
+        document.getElementById("height-after").style.height = heightAfter;
+        document.getElementById("money-before").textContent = form.money.value;
+        document.getElementById("money-after").textContent = result;
       }
 
-      updateHeight();
+      calculate();
     </script>
   </body>
 </html>
