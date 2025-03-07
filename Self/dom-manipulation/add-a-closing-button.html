@@ -78,25 +78,21 @@
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", addButton);
+      const button = document.querySelector(".remove-button");
 
-      function addButton() {
-        const button = document.querySelector(".remove-button");
+      let messages = document.querySelectorAll(".pane");
 
-        let messages = document.querySelectorAll(".pane");
+      function removeMessage(e) {
+        let pane = e.currentTarget.closest(".pane");
 
-        function removeMessage(e) {
-          let pane = e.currentTarget.closest(".pane");
+        if (pane) pane.remove();
+      }
 
-          if (pane) pane.remove();
-        }
-
-        for (let message of messages) {
-          let title = message.querySelector("h3");
-          let newButton = button.cloneNode(true);
-          newButton.addEventListener("click", removeMessage);
-          title.append(newButton);
-        }
+      for (let message of messages) {
+        let title = message.querySelector("h3");
+        let newButton = button.cloneNode(true);
+        newButton.addEventListener("click", removeMessage);
+        title.append(newButton);
       }
     </script>
 
