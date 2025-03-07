@@ -27,19 +27,33 @@
 
     <script>
       // ...your code...
-      let spanElements = document.querySelectorAll("span");
+      let ulElement = document.getElementById("ul");
 
-      for (let span of spanElements) {
-        span.addEventListener("mousedown", () => false);
-        span.addEventListener("click", selectElement);
-      }
+      ulElement.addEventListener("mousedown", () => false);
+      ulElement.addEventListener("click", selectElement);
 
       function selectElement(e) {
-        e.currentTarget.closest("li").classList.add("selected");
+        if (e.target.tagName !== "SPAN") return;
 
-        if (e.ctrlKey || e.metaKey) {
-          e.currentTarget.closest("li").classList.remove("selected");
+        let li = e.target.closest("li");
+
+        if (!(e.ctrlKey || e.metaKey)) {
+          document
+            .querySelectorAll(".selected")
+            .forEach((el) => el.classList.remove("selected"));
         }
+
+        li.classList.toggle("selected");
+      }
+
+      function singleSelect(li) {
+        let selectedElements = document.querySelectorAll(".selected");
+
+        for (let ele of selectedElements) {
+          ele.classList.remove("selected");
+        }
+
+        li.classList.add("selected");
       }
     </script>
   </body>
