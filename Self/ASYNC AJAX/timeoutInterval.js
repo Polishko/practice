@@ -10,25 +10,25 @@ function printNumbersInterval(from, to) {
 
   let timerId = setInterval(function () {
     console.log(current);
-    if (current >= to) {
+    if (current == to) {
       clearInterval(timerId);
     }
-    current += 1000;
+    current++;
   }, 1000);
 }
 
-// printNumbersInterval(1000, 5000);
+// printNumbersInterval(1, 1);
 
 function printNumbersTimeout(from, to) {
   let current = from;
 
-  let timerId = setTimeout(function log() {
-    if (current <= to) {
+  setTimeout(function log() {
+    if (current < to) {
       console.log(current);
-      current += 1000;
-      timerId = setTimeout(log, 1000);
+      setTimeout(log, 1000);
     }
+    current++;
   }, 1000);
 }
 
-printNumbersTimeout(1000, 5000);
+// printNumbersTimeout(1, 5);
