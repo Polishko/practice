@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea style="width: 200px; height: 60px" id="area"></textarea>
+    <button class="clear">Clear</button>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", init);
+
+    function init() {
+      const formElement = document.getElementById("area");
+      const buttonElement = document.querySelector(".clear");
+
+      formElement.value = localStorage.getItem("userInput") || "";
+
+      let debounceTimer;
+
+      formElement.addEventListener("input", (e) => {
+        clearTimeout(debounceTimer);
+
+        debounceTimer =
+          (() => {
+            localStorage.setItem("userInput", e.target.value);
+          },
+          300);
+      });
+
+      buttonElement.addEventListener("click", () => {
+        localStorage.removeItem("userInput");
+        formElement.value = "";
+      });
+    }
+  </script>
+</html>
