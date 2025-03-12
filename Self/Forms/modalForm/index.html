@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Prompt Form</title>
+</head>
+<body style="height: 3000px">
+  <h2>Click the button below</h2>
+  <input type="button" value="Click to show the form" id="show-button">
+
+  <div id="prompt-form-container">
+    <form id="prompt-form">
+      <div id="prompt-message"></div>
+      <input name="text" type="text">
+      <input type="submit" value="Ok">
+      <input type="button" name="cancel" value="Cancel">
+    </form>
+  </div>
+
+  <script>
+    const showButton = document.getElementById("show-button");
+    const form = document.getElementById("prompt-form");
+    const container = document.getElementById("prompt-form-container");
+    const message = document.getElementById("prompt-message");
+    const cancelButton = form.querySelector("input[name='cancel']");
+    const textInput = form.querySelector("input[name='text']");
+
+    function showCover() {
+      let coverDiv = document.createElement("div");
+      coverDiv.id = "cover-div";
+      document.body.style.overflowY = "hidden";
+      document.body.append(coverDiv);
+    }
+
+    function hideCover() {
+      document.getElementById("cover-div").remove();
+      document.body.style.overflowY = "";
+    }
+
+    function showPrompt(text, callback) {
+      showCover();
+      message.innerHTML = text;
+      textInput.value = "";
+
+      function complete(value) {
+        hideCover();
+        container.style.display = "none";
+        document.removeEventListener("keydown", onKeyDown);
+        form.removeEventListener("submit", onSubmit);
+        cancelButton.removeEventListener("click", onCancel);
+        callback(value);
+      }
+
+      function onSubmit(event) {
+        event.preventDefault();
+        let value = textInput.value;
+        if (value === "") return;
+        complete(value);
+      }
+
+      function onCancel() {
+        complete(null);
+      }
+
+      function onKeyDown(event) {
+        if (event.key === "Escape") {
+          complete(null);
+        }
+      }
+
+      container.style.display = "block";
+      textInput.focus();
+
+      document.addEventListener("keydown", onKeyDown);
+      form.addEventListener("submit", onSubmit);
+      cancelButton.addEventListener("click", onCancel);
+    }
+
+    showButton.addEventListener("click", () => {
+      showPrompt("Enter something<br>...smart :)", (value) => {
+        alert("You entered: " + value);
+      });
+    });
+  </script>
+</body>
+</html>
