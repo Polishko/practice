@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Form validation: Task 3</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 30%;
+      }
+
+      .input-container input.error {
+        border: 1px solid red;
+      }
+
+      .error {
+        width: 100%;
+        font-size: 80%;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form novalidate>
+      <label for="mail"
+        >I would like you to provide me with an e-mail address:</label
+      >
+      <div class="input-container">
+        <input type="email" id="mail" name="mail" minlength="10" required />
+        <span class="error" aria-live="polite"></span>
+      </div>
+      <button>Submit</button>
+    </form>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", initializeValidation);
+
+    const email = document.getElementById("mail");
+    const form = document.querySelector("form");
+    const error = document.querySelector(".error");
+
+    email.addEventListener("input", (e) => {
+      if (!email.validity.valid) {
+        showError();
+      } else {
+        error.textContent = "";
+        error.classList.remove("error");
+        email.classList.remove("error");
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      if (!email.validity.valid) {
+        showError();
+        e.preventDefault();
+      }
+    });
+
+    function initializeValidation() {
+      error.textContent = "";
+      error.classList.remove("error");
+      email.classList.remove("error");
+    }
+
+    function showError() {
+      let message = "";
+      if (email.validity.valueMissing) {
+        message = "This field cannot be left empty";
+      } else if (email.validity.typeMismatch) {
+        message = "Enter a valid email address";
+      } else if (email.value.length < 10) {
+        message = "Email address should be at least 10 characters long";
+      }
+
+      error.textContent = message;
+      error.classList.add("error");
+      email.classList.add("error");
+    }
+  </script>
+</html>
