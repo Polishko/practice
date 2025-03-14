@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Form validation: Task 1</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      input:invalid,
+      .error {
+        border: solid 1px red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <h2>Enter your support query</h2>
+      <ul>
+        <li>
+          <label for="uname">User name:</label>
+          <input
+            type="text"
+            name="uname"
+            id="uname"
+            minlength="5"
+            maxlength="20"
+            required
+          />
+        </li>
+        <li>
+          <label for="email">Email address:</label>
+          <input type="email" name="email" id="email" required />
+        </li>
+        <li>
+          <label for="phone">Phone number:</label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            pattern="[0-9]{10}"
+            required
+          />
+        </li>
+        <li>
+          <label for="comment">Comment:</label>
+          <textarea name="comment" id="comment" required> </textarea>
+        </li>
+        <li>
+          <button>Submit comment</button>
+        </li>
+      </ul>
+    </form>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", initializeValidation);
+
+      const comment = document.getElementById("comment");
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", (e) => {
+        if (!isFormValid()) {
+          e.preventDefault();
+        }
+      });
+
+      function initializeValidation() {
+        document.querySelectorAll("input").forEach((ele) => (ele.value = ""));
+        comment.value = "";
+
+        clearErrors();
+        form.reportValidity();
+      }
+
+      function clearErrors() {
+        comment.classList.remove("error");
+        comment.setCustomValidity("");
+      }
+
+      function isCommentValid() {
+        if (comment.value.trim().length > 200) {
+          comment.classList.add("error");
+          comment.setCustomValidity("Comment cannot exceed 200 characters.");
+          return false;
+        }
+
+        comment.classList.remove("error");
+        comment.setCustomValidity("");
+        return true;
+      }
+
+      function isFormValid() {
+        return (
+          isCommentValid() && document.querySelector("form").checkValidity()
+        );
+      }
+    </script>
+  </body>
+</html>
