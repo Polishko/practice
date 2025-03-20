@@ -5,6 +5,7 @@ These are **medium-easy problems** focusing on common patterns that may appear i
 ---
 
 ### **1️⃣ Arrays & Two Pointers**
+
 ✅ **Find the two numbers in a sorted array that sum to a target**
 
 ```python
@@ -20,11 +21,12 @@ def two_sum_sorted(arr, target):
             right -= 1
     return None
 ```
-✔ **Pattern:** Two Pointers  
-✔ **Variations:** Subarray sum, checking for duplicates 
 
+✔ **Pattern:** Two Pointers  
+✔ **Variations:** Subarray sum, checking for duplicates
 
 ✅ **Find a subarray with a given sum**
+
 ```python
 def subarray_sum(arr, target):
     left, curr_sum = 0, 0
@@ -39,6 +41,7 @@ def subarray_sum(arr, target):
 ```
 
 ✅ **Find duplicate numbers in an array**
+
 ```python
 def find_duplicates(arr):
     seen, duplicates = set(), set()
@@ -52,6 +55,7 @@ def find_duplicates(arr):
 ---
 
 ### **2️⃣ Sliding Window**
+
 ✅ **Find the maximum sum of any subarray of size `k`**
 
 ```python
@@ -63,10 +67,12 @@ def max_sum_subarray(arr, k):
         max_sum = max(max_sum, window_sum)
     return max_sum
 ```
+
 ✔ **Pattern:** Sliding Window  
-✔ **Variations:** Find min/max window sum, longest substring problems  
+✔ **Variations:** Find min/max window sum, longest substring problems
 
 ✅ **Find the longest substring with distinct characters**
+
 ```python
 def longest_unique_substring(s):
     char_index, left, max_length = {}, 0, 0
@@ -81,6 +87,7 @@ def longest_unique_substring(s):
 ---
 
 ### **3️⃣ Recursion & DFS**
+
 ✅ **Find the height of a binary tree**
 
 ```python
@@ -89,10 +96,12 @@ def height(root):
         return -1  # Empty tree has height -1
     return max(height(root.left), height(root.right)) + 1
 ```
+
 ✔ **Pattern:** DFS Recursion  
-✔ **Variations:** LCA, tree traversal  
+✔ **Variations:** LCA, tree traversal
 
 ✅ **Find the Lowest Common Ancestor (LCA) of two nodes**
+
 ```python
 def lca(root, p, q):
     if not root or root == p or root == q:
@@ -101,8 +110,33 @@ def lca(root, p, q):
     right = lca(root.right, p, q)
     return root if left and right else left or right
 ```
+**LCA if it's not guaranteed that the two nodes exist**
+```python
+def find_lca(root, p, q):
+    def lca(root, p, q):
+        if not root or root == p or root == q:
+            return root
+        left = lca(root.left, p, q)
+        right = lca(root.right, p, q)
+        return root if left and right else left or right
+
+    # Step 1: Find LCA candidate
+    lca_candidate = lca(root, p, q)
+
+    # Step 2: Verify both p and q exist in the tree
+    def exists(root, target):
+        if not root:
+            return False
+        if root == target:
+            return True
+        return exists(root.left, target) or exists(root.right, target)
+
+    # If both p and q exist, return LCA. Otherwise, return None.
+    return lca_candidate if exists(root, p) and exists(root, q) else None
+```
 
 ✅ **Preorder Traversal of a Binary Tree**
+
 ```python
 def preorder(root):
     return [root.info] + preorder(root.left) + preorder(root.right) if root else []
@@ -111,6 +145,7 @@ def preorder(root):
 ---
 
 ### **4️⃣ String Manipulation**
+
 ✅ **Check if a string is a palindrome (ignoring non-alphanumeric characters)**
 
 ```python
@@ -118,10 +153,12 @@ def is_palindrome(s):
     s = ''.join(c.lower() for c in s if c.isalnum())  # Remove spaces and symbols
     return s == s[::-1]  # Check if reversed string matches
 ```
+
 ✔ **Pattern:** Two Pointers / String Processing  
-✔ **Variations:** Longest palindromic substring, anagram checking  
+✔ **Variations:** Longest palindromic substring, anagram checking
 
 ✅ **Find the longest palindromic substring**
+
 ```python
 def longest_palindrome(s):
     res = ""
@@ -133,6 +170,7 @@ def longest_palindrome(s):
 ```
 
 ✅ **Check if two strings are anagrams**
+
 ```python
 def is_anagram(s1, s2):
     return sorted(s1) == sorted(s2)
@@ -141,6 +179,7 @@ def is_anagram(s1, s2):
 ---
 
 ### **5️⃣ Binary Search**
+
 ✅ **Find target element in a sorted array**
 
 ```python
@@ -156,10 +195,12 @@ def binary_search(arr, target):
             right = mid - 1
     return -1
 ```
+
 ✔ **Pattern:** Binary Search  
-✔ **Variations:** Find first/last occurrence, search in rotated array  
+✔ **Variations:** Find first/last occurrence, search in rotated array
 
 ✅ **Search in a rotated sorted array**
+
 ```python
 def search_rotated(arr, target):
     left, right = 0, len(arr) - 1
@@ -183,19 +224,21 @@ def search_rotated(arr, target):
 ---
 
 ## **🔥 Strategy for Test Day**
-1. **Today:** 
+
+1. **Today:**
+
    - Solve these problems quickly.
    - Focus on recognizing the **pattern** behind each problem.
 
-2. **Tomorrow, before the test:**  
+2. **Tomorrow, before the test:**
+
    - Review the solutions you struggled with.
    - Don’t learn completely new topics—**reinforce what you already understand.**
 
-3. **During the test:**  
-   - Approach each problem systematically. 
+3. **During the test:**
+   - Approach each problem systematically.
    - **Most candidates struggle**, so structured thinking matters more than a perfect score.
 
 ---
 
 🚀 **Good luck! You got this!** 😊
-
