@@ -122,6 +122,86 @@ def preorder(root):
 
 ---
 
-### **📌 Want More?**
-Would you like variations of **inorder/postorder traversal or iterative tree traversal** included? 🚀😊
+### Cheatsheet
+## **Tree Traversal Cheat Sheet**
+
+### **1️⃣ Depth-First Traversal (DFS)**
+DFS explores as deep as possible before backtracking. It can be implemented recursively or iteratively using a stack.
+
+#### **🔹 Preorder Traversal (Root → Left → Right)**
+✅ **Visit root first, then left subtree, then right subtree.**
+
+```python
+# Recursive Preorder
+def preorder(root):
+    if root:
+        print(root.value)  # Process root
+        preorder(root.left)  # Recur on left subtree
+        preorder(root.right)  # Recur on right subtree
+```
+✔ **Use Case:** Used for copying trees, expression evaluation.
+
+#### **🔹 Inorder Traversal (Left → Root → Right)**
+✅ **Visit left subtree first, then root, then right subtree.**
+
+```python
+# Recursive Inorder
+def inorder(root):
+    if root:
+        inorder(root.left)  # Recur on left subtree
+        print(root.value)  # Process root
+        inorder(root.right)  # Recur on right subtree
+```
+✔ **Use Case:** Produces sorted order for a BST.
+
+#### **🔹 Postorder Traversal (Left → Right → Root)**
+✅ **Visit left subtree first, then right subtree, then root.**
+
+```python
+# Recursive Postorder
+def postorder(root):
+    if root:
+        postorder(root.left)  # Recur on left subtree
+        postorder(root.right)  # Recur on right subtree
+        print(root.value)  # Process root
+```
+✔ **Use Case:** Used for deleting trees, evaluating expressions.
+
+---
+
+### **2️⃣ Breadth-First Traversal (BFS)**
+BFS explores all nodes at the current level before moving deeper. It uses a queue.
+
+#### **🔹 Level Order Traversal (BFS)**
+✅ **Visit all nodes level by level.**
+
+```python
+from collections import deque
+
+def level_order(root):
+    if not root:
+        return
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        print(node.value)  # Process node
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+```
+✔ **Use Case:** Shortest path problems, hierarchical structures.
+
+---
+
+### **🚀 Quick Comparison Table**
+
+| **Traversal**   | **Order**                | **Use Case**                         |
+|----------------|-------------------------|-------------------------------------|
+| **Preorder**   | Root → Left → Right      | Copying trees, evaluating expressions |
+| **Inorder**    | Left → Root → Right      | Sorting BSTs                         |
+| **Postorder**  | Left → Right → Root      | Deleting trees, evaluating expressions |
+| **Level Order**| Top to Bottom, Left to Right | Shortest path, BFS problems |
+
+
 
